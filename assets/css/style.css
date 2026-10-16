@@ -1,0 +1,950 @@
+/* ==========================================================================
+   VIBRANT ACADEMIC MINIMAL - DESIGN SYSTEM & GLOBAL FRAMEWORK
+   Dự án: Web Bán Đồ Dùng Học Tập
+   File: assets/css/style.css
+   Mục đích: File CSS dùng chung toàn bộ trang web (Theme, Reset, Kích thước chuẩn, Grid, Components, Utilities)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. IMPORT FONT CHỮ (Google Fonts: Be Vietnam Pro)
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+
+/* --------------------------------------------------------------------------
+   2. HỆ THỐNG BIẾN TOÀN CỤC (DESIGN TOKENS & CSS VARIABLES)
+   -------------------------------------------------------------------------- */
+:root {
+  /* ===== BẢNG MÀU CHÍNH (THEME PALETTES THEO HÌNH MẪU) ===== */
+  
+  /* Primary (#FF6900): Màu cam năng động, nhận diện thương hiệu học tập & sáng tạo */
+  --color-primary-50:       #fff5ed;
+  --color-primary-100:      #ffe1cc;
+  --color-primary-200:      #ffc399;
+  --color-primary-300:      #ffa566;
+  --color-primary-400:      #ff8733;
+  --color-primary:          #FF6900; /* Màu Primary gốc */
+  --color-primary-600:      #c25000;
+  --color-primary-700:      #9e3e00;
+  --color-primary-800:      #8A3500; /* Nâu cam trầm dùng cho nút bấm trong thiết kế */
+  --color-primary-900:      #331500;
+
+  /* Secondary (#212121): Đen xám hiện đại, chiều sâu tối giản */
+  --color-secondary-50:     #f8f8f8;
+  --color-secondary-100:    #f0f0f0;
+  --color-secondary-200:    #e0e0e0;
+  --color-secondary-300:    #c4c4c4;
+  --color-secondary-400:    #9e9e9e;
+  --color-secondary-500:    #717171;
+  --color-secondary-600:    #525252;
+  --color-secondary-700:    #383838;
+  --color-secondary:        #212121; /* Màu Secondary gốc */
+  --color-secondary-900:    #121212;
+
+  /* Tertiary (#009EFB): Xanh dương tri thức, điểm nhấn sinh động */
+  --color-tertiary-50:      #f0f9ff;
+  --color-tertiary-100:     #ccecfe;
+  --color-tertiary-200:     #99d8fe;
+  --color-tertiary-300:     #66c5fd;
+  --color-tertiary-400:     #33b1fc;
+  --color-tertiary:         #009EFB; /* Màu Tertiary gốc */
+  --color-tertiary-600:     #0082cf;
+  --color-tertiary-700:     #0064a0;
+  --color-tertiary-800:     #00456e;
+  --color-tertiary-900:     #00263d;
+
+  /* Neutral (#757575): Xám trung tính cân bằng thị giác */
+  --color-neutral-50:       #f9fafb;
+  --color-neutral-100:      #f3f4f6;
+  --color-neutral-200:      #e5e7eb;
+  --color-neutral-300:      #d1d5db;
+  --color-neutral-400:      #9ca3af;
+  --color-neutral:          #757575; /* Màu Neutral gốc */
+  --color-neutral-600:      #595959;
+  --color-neutral-700:      #404040;
+  --color-neutral-800:      #262626;
+  --color-neutral-900:      #171717;
+
+  /* Màu chức năng & phản hồi (Feedback Colors) */
+  --color-danger:           #D32F2F;
+  --color-danger-hover:     #b71c1c;
+  --color-success:          #10B981;
+  --color-warning:          #F59E0B;
+  --color-info:             #009EFB;
+
+  /* Nền trang & bề mặt (Surfaces & Backgrounds) */
+  --bg-page:                #f7f8fa;
+  --bg-surface:             #ffffff;
+  --bg-panel:               #ebecef;
+  --bg-muted:               #f1f2f6;
+  --bg-dock:                #e9eaee;
+
+  /* Đường viền (Borders) */
+  --border-light:           #e5e7eb;
+  --border-medium:          #d1d5db;
+  --border-dark:            #212121;
+
+  /* Màu chữ (Typography Colors) */
+  --text-main:              #212121;
+  --text-headline:          #212121;
+  --text-body:              #3d332d;
+  --text-muted:             #757575;
+  --text-white:             #ffffff;
+
+  /* ===== HỆ THỐNG FONT CHỮ (TYPOGRAPHY) ===== */
+  --font-family-base:       'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-family-headline:   'Be Vietnam Pro', sans-serif;
+  --font-family-body:       'Be Vietnam Pro', sans-serif;
+  --font-family-label:      'Be Vietnam Pro', sans-serif;
+
+  /* Độ đậm chữ (Font Weights) */
+  --fw-light:               300;
+  --fw-regular:             400;
+  --fw-medium:              500;
+  --fw-semibold:            600;
+  --fw-bold:                700;
+  --fw-extrabold:           800;
+
+  /* Cỡ chữ chuẩn (Font Sizes) */
+  --fs-xs:                  0.75rem;    /* 12px */
+  --fs-sm:                  0.875rem;   /* 14px */
+  --fs-base:                1rem;       /* 16px - Base */
+  --fs-lg:                  1.125rem;   /* 18px */
+  --fs-xl:                  1.25rem;    /* 20px */
+  --fs-2xl:                 1.5rem;     /* 24px */
+  --fs-3xl:                 1.875rem;   /* 30px */
+  --fs-4xl:                 2.25rem;    /* 36px */
+  --fs-5xl:                 3rem;       /* 48px */
+
+  /* Chiều cao dòng (Line Heights) */
+  --lh-tight:               1.2;
+  --lh-snug:                1.375;
+  --lh-normal:              1.5;
+  --lh-relaxed:             1.625;
+  --lh-loose:               1.75;
+
+  /* ===== KÍCH THƯỚC & KHOẢNG CÁCH CHUẨN (SPACING & SIZING) ===== */
+  --space-0:                0;
+  --space-1:                0.25rem;    /* 4px */
+  --space-2:                0.5rem;     /* 8px */
+  --space-3:                0.75rem;    /* 12px */
+  --space-4:                1rem;       /* 16px */
+  --space-5:                1.25rem;    /* 20px */
+  --space-6:                1.5rem;     /* 24px */
+  --space-8:                2rem;       /* 32px */
+  --space-10:               2.5rem;     /* 40px */
+  --space-12:               3rem;       /* 48px */
+  --space-16:               4rem;       /* 64px */
+
+  /* Kích thước Container chiều rộng chuẩn (Max Container Widths) */
+  --container-sm:           540px;
+  --container-md:           720px;
+  --container-lg:           960px;
+  --container-xl:           1140px;
+  --container-xxl:          1320px;
+  --container-padding:      1rem;       /* 16px mỗi bên */
+
+  /* ===== BO GÓC (BORDER RADIUS) ===== */
+  --radius-none:            0;
+  --radius-xs:              4px;
+  --radius-sm:              6px;
+  --radius-md:              10px;
+  --radius-lg:              16px;
+  --radius-xl:              22px;
+  --radius-2xl:             28px;
+  --radius-full:            9999px;
+
+  /* ===== ĐỔ BÓNG (BOX SHADOWS) ===== */
+  --shadow-sm:              0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md:              0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg:              0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl:              0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-subtle:          0 2px 10px rgba(0, 0, 0, 0.03);
+
+  /* ===== HIỆU ỨNG CHUYỂN ĐỘNG (TRANSITIONS) ===== */
+  --transition-fast:        150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal:      250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth:      350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   3. KHỞI TẠO RESET TRANG VỀ GIÁ TRỊ 0 & KÍCH THƯỚC CHUẨN
+   (Đưa margin, padding mặc định về 0, chuẩn hóa box-sizing toàn diện)
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Chuẩn hóa HTML Root */
+html {
+  font-size: 16px;                     /* Kích thước cơ sở 1rem = 16px */
+  line-height: var(--lh-normal);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* Chuẩn hóa Body trang web */
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-normal);
+  color: var(--text-main);
+  background-color: var(--bg-page);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Căn chỉnh khối ngữ nghĩa (Semantic Layout Elements) */
+header, main, footer, section, article, aside, nav, figure, figcaption {
+  display: block;
+}
+
+main {
+  flex: 1 0 auto;                      /* Giúp footer luôn nằm dưới cùng trang */
+  width: 100%;
+}
+
+/* Chuẩn hóa danh sách */
+ul, ol, menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Chuẩn hóa liên kết */
+a {
+  color: inherit;
+  text-decoration: none;
+  background-color: transparent;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+/* Chuẩn hóa hình ảnh và phương tiện truyền thông */
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* Chuẩn hóa Form Controls (Reset padding, border, outline, font kế thừa) */
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+button:disabled, input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Chuẩn hóa bảng biểu */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+th, td {
+  padding: 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* Tùy chỉnh thanh cuộn trình duyệt (Custom Scrollbar) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-neutral-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-300);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-400);
+}
+
+/* Bôi đen văn bản */
+::selection {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-800);
+}
+
+/* --------------------------------------------------------------------------
+   4. HỆ THỐNG KHUNG CHỨA CHUẨN (CONTAINER & LAYOUT WRAPPERS)
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.container-fluid {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Breakpoints kích thước chuẩn theo chuẩn thiết kế responsive */
+@media (min-width: 576px) {
+  .container { max-width: var(--container-sm); }
+}
+
+@media (min-width: 768px) {
+  .container { max-width: var(--container-md); }
+}
+
+@media (min-width: 992px) {
+  .container { max-width: var(--container-lg); }
+}
+
+@media (min-width: 1200px) {
+  .container { max-width: var(--container-xl); }
+}
+
+@media (min-width: 1400px) {
+  .container { max-width: var(--container-xxl); }
+}
+
+/* Section định dạng chuẩn toàn bộ trang */
+.section {
+  width: 100%;
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+
+.section-sm {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+
+.section-lg {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+}
+
+/* --------------------------------------------------------------------------
+   5. HỆ THỐNG LƯỚI & CỘT CHUẨN (12-COLUMN GRID SYSTEM)
+   -------------------------------------------------------------------------- */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(var(--container-padding) * -1);
+  margin-right: calc(var(--container-padding) * -1);
+}
+
+.row > * {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.col    { flex: 1 0 0%; }
+.col-auto { flex: 0 0 auto; width: auto; }
+
+.col-1  { width: 8.333333%; }
+.col-2  { width: 16.666667%; }
+.col-3  { width: 25%; }
+.col-4  { width: 33.333333%; }
+.col-5  { width: 41.666667%; }
+.col-6  { width: 50%; }
+.col-7  { width: 58.333333%; }
+.col-8  { width: 66.666667%; }
+.col-9  { width: 75%; }
+.col-10 { width: 83.333333%; }
+.col-11 { width: 91.666667%; }
+.col-12 { width: 100%; }
+
+@media (min-width: 768px) {
+  .col-md-1  { width: 8.333333%; }
+  .col-md-2  { width: 16.666667%; }
+  .col-md-3  { width: 25%; }
+  .col-md-4  { width: 33.333333%; }
+  .col-md-5  { width: 41.666667%; }
+  .col-md-6  { width: 50%; }
+  .col-md-7  { width: 58.333333%; }
+  .col-md-8  { width: 66.666667%; }
+  .col-md-9  { width: 75%; }
+  .col-md-10 { width: 83.333333%; }
+  .col-md-11 { width: 91.666667%; }
+  .col-md-12 { width: 100%; }
+}
+
+@media (min-width: 992px) {
+  .col-lg-1  { width: 8.333333%; }
+  .col-lg-2  { width: 16.666667%; }
+  .col-lg-3  { width: 25%; }
+  .col-lg-4  { width: 33.333333%; }
+  .col-lg-5  { width: 41.666667%; }
+  .col-lg-6  { width: 50%; }
+  .col-lg-7  { width: 58.333333%; }
+  .col-lg-8  { width: 66.666667%; }
+  .col-lg-9  { width: 75%; }
+  .col-lg-10 { width: 83.333333%; }
+  .col-lg-11 { width: 91.666667%; }
+  .col-lg-12 { width: 100%; }
+}
+
+/* --------------------------------------------------------------------------
+   6. TYPOGRAPHY CLASSES
+   -------------------------------------------------------------------------- */
+.font-headline {
+  font-family: var(--font-family-headline);
+  letter-spacing: -0.02em;
+}
+
+.font-body {
+  font-family: var(--font-family-body);
+}
+
+.font-label {
+  font-family: var(--font-family-label);
+  letter-spacing: 0.01em;
+}
+
+/* Tiêu đề (Headlines) */
+h1, .h1, .headline-1 {
+  font-family: var(--font-family-headline);
+  font-size: var(--fs-4xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--text-headline);
+  letter-spacing: -0.03em;
+}
+
+h2, .h2, .headline-2 {
+  font-family: var(--font-family-headline);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--text-headline);
+  letter-spacing: -0.02em;
+}
+
+h3, .h3, .headline-3 {
+  font-family: var(--font-family-headline);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  color: var(--text-headline);
+}
+
+h4, .h4 {
+  font-family: var(--font-family-headline);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  color: var(--text-headline);
+}
+
+h5, .h5 {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+}
+
+h6, .h6 {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+}
+
+/* Nội dung văn bản (Body text) */
+.body-lg {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-loose);
+  color: var(--text-body);
+}
+
+.body-md, p {
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  color: var(--text-body);
+}
+
+.body-sm {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--text-muted);
+}
+
+/* Nhãn văn bản (Labels) */
+.label-text {
+  font-family: var(--font-family-label);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-muted);
+}
+
+.label-bold {
+  font-family: var(--font-family-label);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+/* --------------------------------------------------------------------------
+   7. HỆ THỐNG NÚT BẤM (BUTTONS THEO THIẾT KẾ MẪU)
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.65rem 1.4rem;
+  font-family: var(--font-family-base);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Button Primary (Nâu cam trầm theo mẫu thiết kế) */
+.btn-primary {
+  background-color: var(--color-primary-800);
+  color: var(--text-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-700);
+}
+
+/* Button Primary Vibrant (Màu cam tươi #FF6900) */
+.btn-primary-vibrant {
+  background-color: var(--color-primary);
+  color: var(--text-white);
+  box-shadow: 0 4px 12px rgba(255, 105, 0, 0.25);
+}
+
+.btn-primary-vibrant:hover {
+  background-color: var(--color-primary-600);
+}
+
+/* Button Secondary (Màu xám nhạt tối giản) */
+.btn-secondary {
+  background-color: var(--bg-panel);
+  color: var(--color-secondary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-neutral-200);
+}
+
+/* Button Inverted (Đen bóng #212121) */
+.btn-inverted {
+  background-color: var(--color-secondary);
+  color: var(--text-white);
+}
+
+.btn-inverted:hover {
+  background-color: #000000;
+}
+
+/* Button Outlined (Viền mảnh) */
+.btn-outlined {
+  background-color: transparent;
+  color: var(--color-secondary);
+  border: 1.5px solid var(--border-medium);
+}
+
+.btn-outlined:hover {
+  background-color: var(--bg-surface);
+  border-color: var(--color-secondary);
+}
+
+/* Button Tertiary (Xanh dương tươi) */
+.btn-tertiary {
+  background-color: var(--color-tertiary);
+  color: var(--text-white);
+}
+
+.btn-tertiary:hover {
+  background-color: var(--color-tertiary-600);
+}
+
+/* Nút vuông bo góc có icon (Icon button xanh vuông) */
+.btn-icon-square {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background-color: var(--color-tertiary);
+  color: var(--text-white);
+  transition: all var(--transition-fast);
+}
+
+.btn-icon-square:hover {
+  background-color: var(--color-tertiary-600);
+  transform: translateY(-1px);
+}
+
+/* Nút tròn hành động (Circular Action Buttons ở góc phải dưới) */
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-white);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-circle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-circle-primary  { background-color: var(--color-primary-800); }
+.btn-circle-neutral  { background-color: #5c5c5c; }
+.btn-circle-tertiary { background-color: var(--color-tertiary); }
+.btn-circle-danger   { background-color: var(--color-danger); }
+
+/* Kích thước Button bổ sung */
+.btn-sm {
+  padding: 0.45rem 0.9rem;
+  font-size: var(--fs-xs);
+}
+
+.btn-lg {
+  padding: 0.85rem 1.8rem;
+  font-size: var(--fs-base);
+}
+
+/* --------------------------------------------------------------------------
+   8. FORM & INPUTS (THANH TÌM KIẾM & Ô NHẬP LIỆU CHUẨN)
+   -------------------------------------------------------------------------- */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 340px;
+  padding: 0.65rem 1.1rem;
+  background-color: #f7f7f9;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.search-bar:focus-within {
+  border-color: var(--color-primary-400);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 105, 0, 0.12);
+}
+
+.search-bar .search-icon {
+  color: var(--text-muted);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.search-bar input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: var(--fs-sm);
+  color: var(--text-main);
+}
+
+.search-bar input::placeholder {
+  color: #9e9e9e;
+}
+
+/* Ô nhập liệu Form chuẩn */
+.form-group {
+  margin-bottom: var(--space-4);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-main);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: var(--fs-sm);
+  color: var(--text-main);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(255, 105, 0, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   9. NHÃN DÁN & HUY HIỆU (BADGES & LABELS)
+   -------------------------------------------------------------------------- */
+.tag-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.55rem 1.1rem;
+  background-color: var(--color-primary);
+  color: var(--text-white);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  box-shadow: 0 2px 8px rgba(255, 105, 0, 0.2);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  border-radius: var(--radius-sm);
+}
+
+.badge-primary   { background-color: var(--color-primary-100); color: var(--color-primary-800); }
+.badge-tertiary  { background-color: var(--color-tertiary-100); color: var(--color-tertiary-800); }
+.badge-neutral   { background-color: var(--color-neutral-100); color: var(--color-neutral-700); }
+.badge-danger    { background-color: #fee2e2; color: var(--color-danger); }
+
+/* --------------------------------------------------------------------------
+   10. THANH ĐIỀU HƯỚNG NỔI (FLOATING DOCK / PILL NAV)
+   -------------------------------------------------------------------------- */
+.floating-dock {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.45rem 1rem;
+  background-color: var(--bg-dock);
+  border-radius: var(--radius-full);
+}
+
+.dock-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  color: var(--color-secondary-600);
+  transition: all var(--transition-fast);
+}
+
+.dock-item:hover {
+  color: var(--color-secondary);
+}
+
+.dock-item.active {
+  background-color: var(--color-primary-800);
+  color: var(--text-white);
+  box-shadow: 0 2px 8px rgba(138, 53, 0, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   11. VẠCH ĐIỂM NHẤN TRANG TRÍ (ACCENT BARS)
+   -------------------------------------------------------------------------- */
+.accent-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.accent-bar {
+  height: 6px;
+  border-radius: var(--radius-full);
+}
+
+.accent-bar.bar-primary   { width: 55%; background-color: var(--color-primary-800); }
+.accent-bar.bar-secondary { width: 70%; background-color: var(--color-secondary-700); }
+.accent-bar.bar-tertiary  { width: 45%; background-color: var(--color-tertiary); }
+
+/* --------------------------------------------------------------------------
+   12. CARDS & BỀ MẶT HIỂN THỊ (SURFACES & CONTAINERS)
+   -------------------------------------------------------------------------- */
+.card {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-body {
+  padding: var(--space-5);
+}
+
+.card-header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.card-footer {
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border-light);
+}
+
+.panel {
+  background-color: var(--bg-panel);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* --------------------------------------------------------------------------
+   13. TIỆN ÍCH DÙNG CHUNG (UTILITY CLASSES)
+   -------------------------------------------------------------------------- */
+/* Flexbox Utilities */
+.d-flex         { display: flex; }
+.d-inline-flex  { display: inline-flex; }
+.d-block        { display: block; }
+.d-none         { display: none; }
+
+.flex-row       { flex-direction: row; }
+.flex-column    { flex-direction: column; }
+.flex-wrap      { flex-wrap: wrap; }
+
+.justify-start   { justify-content: flex-start; }
+.justify-center  { justify-content: center; }
+.justify-end     { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+
+.align-start     { align-items: flex-start; }
+.align-center    { align-items: center; }
+.align-end       { align-items: flex-end; }
+
+/* Grid Utilities */
+.d-grid         { display: grid; }
+.grid-cols-2    { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3    { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4    { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Gap Utilities */
+.gap-0 { gap: 0; }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+
+/* Spacing Margin Utilities (Đưa về 0 & khoảng chuẩn) */
+.m-0  { margin: 0 !important; }
+.mt-0 { margin-top: 0 !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.ml-0 { margin-left: 0 !important; }
+.mr-0 { margin-right: 0 !important; }
+
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Spacing Padding Utilities (Đưa về 0 & khoảng chuẩn) */
+.p-0  { padding: 0 !important; }
+.pt-0 { padding-top: 0 !important; }
+.pb-0 { padding-bottom: 0 !important; }
+.pl-0 { padding-left: 0 !important; }
+.pr-0 { padding-right: 0 !important; }
+
+.p-2  { padding: var(--space-2); }
+.p-3  { padding: var(--space-3); }
+.p-4  { padding: var(--space-4); }
+.p-6  { padding: var(--space-6); }
+.p-8  { padding: var(--space-8); }
+
+/* Sizing Utilities */
+.w-full   { width: 100%; }
+.h-full   { height: 100%; }
+.min-vh-100 { min-height: 100vh; }
+
+/* Text Utilities */
+.text-left    { text-align: left; }
+.text-center  { text-align: center; }
+.text-right   { text-align: right; }
+
+.text-primary   { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-tertiary  { color: var(--color-tertiary); }
+.text-muted     { color: var(--text-muted); }
+.text-white     { color: var(--text-white); }
+
+/* Background Utilities */
+.bg-page     { background-color: var(--bg-page); }
+.bg-surface  { background-color: var(--bg-surface); }
+.bg-primary  { background-color: var(--color-primary); }
+.bg-secondary{ background-color: var(--color-secondary); }
